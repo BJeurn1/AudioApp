@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
+
+@media only screen and (max-width: 1060px) {
+    /* Mobile */
+
+    #MobileWrapper {
+        position:absolute;
+        top:0;
+        left:0;
+        display:initial;
+        background:#303030;
+        width:100vw;
+        height:100vh;
+    }
+
+    #DesktopWrapper {
+        display:none;
+    }
+}
+
+@media only screen and (min-width: 1060px) {
+    /* Desktop */
+
+    #DesktopWrapper {
+        position:absolute;
+        top:0;
+        left:0;
+        display:initial;
+        background:#303030;
+        width:100vw;
+        height:100vh;
+        text-align:center;
+    }
+
+    #MobileWrapper {
+        display:none;
+    }
+}
+
+/* General CSS */
+body {
+    margin:0;
+    padding:0;
+}
+
+.LoadingWrapper {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:99999;
+    background:#1f1f1f;
+    width:100vw;
+    height:100vh;
+    text-align:center;
+    transition:.6s ease;
+    opacity:0;
+} .LoadingWrapper.visible {
+    opacity:1;
+} .LoadingWrapper.gone {
+    display:none;
+}
+
+.CenterText {
+    position:relative;
+    top:40%;
+    transform:translateY(-50%);
+    color:white;
+    font-size:5vh;
+    font-family:'Titillium Web';
+    animation:LoadingTextAnim 2s infinite;
+}
+
+@keyframes LoadingTextAnim {
+    0% {opacity:1}
+    50% {opacity:.5}
+    100% {opacity:1}
+}
