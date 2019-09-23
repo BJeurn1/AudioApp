@@ -5,6 +5,7 @@ const GetAudioData = async () => {
 }
 
 let GlobalAudioFiles = [];
+let SelectedAudio;
 
 const GetAudio = async () => {
     const AF = await GetAudioData();
@@ -23,12 +24,25 @@ const GetAudio = async () => {
     });
 
     GlobalAudioFiles = AudioFiles;
-
+    console.log(GlobalAudioFiles);
     ListAudio();
 }
 
 const ListAudio = () => {
+    const AudioListElement = document.getElementById('AudioList');
     GlobalAudioFiles.forEach(file => {
-        
+        AudioListElement.innerHTML+= '<li class="AudioItem"><p class="AudioInfoPrev left" onclick="SelectAudio('+GlobalAudioFiles.indexOf(file)+')">'+file.source+'</p><p class="AudioInfoPrev" onclick="SelectAudio('+GlobalAudioFiles.indexOf(file)+')">'+file.volume+ ' ' +file.filter+'</p><p class="AudioInfoPrev InfoIcon" onclick="ShowInfo(\'index\')">i</p></li>'
     });
+
+    // const InfoButtons = document.getElementsByClassName('InfoIcon');
+    // for (let i = 0; i < InfoButtons.length; i++) {
+    //     InfoButtons[i].offsetWidth = InfoButtons[i].offsetHeight;
+    //     console.log(InfoButtons[i].offsetHeight);
+    // }
+}
+
+const SelectAudio = (index) => {
+    SelectedAudio = GlobalAudioFiles[index];
+    Navto();
+    //play audio
 }

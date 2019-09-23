@@ -3,5 +3,7 @@ const BodyLoad = () => {
     LoadWrapper.classList.remove('visible');
     setTimeout(function (){
         LoadWrapper.classList.add('gone');
+        GetAudio();
     }, 600);
+    
 }

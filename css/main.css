@@ -59,6 +59,42 @@
     } .Page.active {
         display:block;
     }
+
+    #AudioList {
+        position:relative;
+        width:100vw;
+        padding:0;
+        margin:0;
+        text-decoration:none;
+    }
+
+    .AudioItem {
+        border-bottom:1px solid #575757;
+        display:inline-block;
+        color:#E5E5E5;
+        width:100%;
+        transition:.3s ease;
+    } .AudioItem.active {
+        color:#FFA800;
+    }
+
+    .AudioInfoPrev {
+        display:inline-block;
+        margin:3vw;;
+        font-size:3vh;
+        font-weight:normal;
+        font-family:'Titillium Web';
+    } .AudioInfoPrev.left {
+        left:0;
+    }
+
+    .AudioInfoPrev.InfoIcon {
+        border-radius:50%;
+        border:1px solid white;
+        height:calc(100% - 6vw);
+        width: 8vw;
+        text-align: center;
+    }
 }
 
 @media only screen and (min-width: 1060px) {
