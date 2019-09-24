@@ -5,7 +5,6 @@ const GetAudioData = async () => {
 }
 
 let GlobalAudioFiles = [];
-let SelectedAudio;
 let SelectedAudioSource;
 
 const GetAudio = async () => {
@@ -19,14 +18,24 @@ const GetAudio = async () => {
                 filter: file.filter,
                 volume: file.volume,
                 source: file.source,
-                length: audio.duration, //add this att later cause audio needs to load
+                length: '',
                 date: file.date 
             }
         );
     });
 
+    setTimeout(function (){
+        ListAudioLength();
+    }, 1000);
+
     GlobalAudioFiles = AudioFiles;
     ListAudio();
+}
+
+const ListAudioLength = () => {
+    GlobalAudioFiles.forEach (file => {
+        file.length = file.audio.duration;
+    })
 }
 
 const ListAudio = () => {
@@ -48,7 +57,8 @@ const SelectAudio = (index, newsource) => {
 
     SelectedAudioSource = newsource;
     SelectedAudio = GlobalAudioFiles[index];
+    SelectedREALAudio = GlobalAudioFiles[index].audio;
 
     Navto();
-    //play audio
+    PlayAfterSelect();
 }

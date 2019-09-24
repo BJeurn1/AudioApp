@@ -15,4 +15,6 @@ const UpdateVolume = (value) => {
 
     VolumeDisplay.value = GlobalVolume;
     VolumeSlider.value = GlobalVolume;
+
+    SelectedREALAudio.volume = 1 / 300 * GlobalVolume;
 }
