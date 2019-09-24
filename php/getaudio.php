@@ -11,7 +11,7 @@
     $files = array();
     
     $filedir = '';
-    
+
     foreach (new DirectoryIterator('../assets/audio') as $curfile) {
         if (strpos($curfile->getFilename(), '.mp3')) {
             $filedir = "./assets/audio/" . $curfile->getFilename();
@@ -25,7 +25,6 @@
             $file->volume = $filedata[1];
             $file->date = $filedata[2];
             $file->source = $filedata[3];
-            $file->length = $filedata[4];
 
             $files[] = $file;
         }

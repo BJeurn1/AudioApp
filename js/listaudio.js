@@ -6,43 +6,49 @@ const GetAudioData = async () => {
 
 let GlobalAudioFiles = [];
 let SelectedAudio;
+let SelectedAudioSource;
 
 const GetAudio = async () => {
     const AF = await GetAudioData();
     let AudioFiles = [];
 
     AF.forEach(file => {
+        let audio = new Audio(file.directory);
         AudioFiles.push({
-                audio: new Audio(file.directory),
+                audio: audio,
                 filter: file.filter,
                 volume: file.volume,
                 source: file.source,
-                length: file.length,
-                date: file.date
+                length: audio.duration, //add this att later cause audio needs to load
+                date: file.date 
             }
         );
     });
 
     GlobalAudioFiles = AudioFiles;
-    console.log(GlobalAudioFiles);
     ListAudio();
 }
 
 const ListAudio = () => {
     const AudioListElement = document.getElementById('AudioList');
     GlobalAudioFiles.forEach(file => {
-        AudioListElement.innerHTML+= '<li class="AudioItem"><p class="AudioInfoPrev left" onclick="SelectAudio('+GlobalAudioFiles.indexOf(file)+')">'+file.source+'</p><p class="AudioInfoPrev" onclick="SelectAudio('+GlobalAudioFiles.indexOf(file)+')">'+file.volume+ ' ' +file.filter+'</p><p class="AudioInfoPrev InfoIcon" onclick="ShowInfo(\'index\')">i</p></li>'
+        AudioListElement.innerHTML+= '<li class="AudioItem"><p class="AudioInfoPrev" onclick="SelectAudio('+GlobalAudioFiles.indexOf(file)+', this.innerHTML)">'+file.source+'</p><p class="AudioInfoPrev" onclick="SelectAudio('+GlobalAudioFiles.indexOf(file)+')">'+file.volume+ ' ' +file.filter+'</p><p class="AudioInfoPrev InfoIcon" onclick="ShowInfo(\'index\')">i</p></li>'
     });
-
-    // const InfoButtons = document.getElementsByClassName('InfoIcon');
-    // for (let i = 0; i < InfoButtons.length; i++) {
-    //     InfoButtons[i].offsetWidth = InfoButtons[i].offsetHeight;
-    //     console.log(InfoButtons[i].offsetHeight);
-    // }
 }
 
-const SelectAudio = (index) => {
+const SelectAudio = (index, newsource) => {
+    const AudioItems = document.getElementsByClassName('AudioItem');
+    for (let i = 0; i < AudioItems.length; i++) {
+        if (AudioItems[i].innerHTML.includes(SelectedAudioSource)) {
+            AudioItems[i].classList.remove('active');
+        } else if (AudioItems[i].innerHTML.includes(newsource)) {
+            AudioItems[i].classList.add('active');
+        }
+    }
+
+    SelectedAudioSource = newsource;
     SelectedAudio = GlobalAudioFiles[index];
+
     Navto();
     //play audio
 }
