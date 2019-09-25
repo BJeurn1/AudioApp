@@ -2,9 +2,6 @@ let LoopAudio = false;
 let AudioActive = false;
 let SelectedAudio;
 let SelectedREALAudio = new Audio();
-let LengthBarCurr = 0;
-let LengthSecondsPlayed = 0;
-let LengthBarWPS; //width per second
 
 const CurFileName = document.getElementById('FileTitleSource');
 const MeasuredDB = document.getElementById('OriginalDB');
@@ -33,14 +30,12 @@ const PlayPause = () => {
 }
 
 const PlayAfterSelect = () => {
-    LengthBarCurr = 0;
     PlayPauseButton.innerHTML = "<i class='far fa-pause'></i>";
     MeasuredDB.innerHTML = "Original: " + SelectedAudio.volume + " " + SelectedAudio.filter;
     CurFileName.innerHTML = SelectedAudio.source;
     CurFileLength.innerHTML = "0:00";
-    PlaybackBar.style.width = LengthBarCurr;
+    PlaybackBar.style.width = (100 / SelectedREALAudio.length) * SelectedREALAudio.currentTime;
     MaxFileLength.innerHTML = ConvertLength(SelectedAudio.length);
-    LengthBarWPS = 100 / SelectedAudio.length;
     SelectedREALAudio.play();
     AudioActive = true;
 }
@@ -58,20 +53,18 @@ const ConvertLength = (length) => {
 
 const SecondTimer = setInterval(function() { 
     if (AudioActive) {
-        LengthBarCurr+=LengthBarWPS;
-        PlaybackBar.style.width = LengthBarCurr + "%";
-        LengthSecondsPlayed++;
-        CurFileLength.innerHTML = ConvertLength(LengthSecondsPlayed);
-
-        if (LengthBarCurr >= 100 && LoopAudio) {
+        PlaybackBar.style.width = (100 / SelectedREALAudio.duration) * SelectedREALAudio.currentTime + "%";
+        CurFileLength.innerHTML = ConvertLength(SelectedREALAudio.currentTime);
+        if (SelectedREALAudio.currentTime >= SelectedREALAudio.duration && LoopAudio) {
             SelectedREALAudio.play();
+            CurFileLength.innerHTML = ConvertLength(0);
+            PlaybackBar.style.width = '0%';
+        } else if (SelectedREALAudio.currentTime >= SelectedREALAudio.duration) {
             LengthBarCurr = 0;
-            LengthSecondsPlayed = 0;
-        } else if (LengthBarCurr >= 100) {
-            LengthBarCurr = 0;
-            LengthSecondsPlayed = 0;
             PlayPauseButton.innerHTML = "<i class='far fa-play'></i>";
+            CurFileLength.innerHTML = ConvertLength(0);
+            PlaybackBar.style.width = '0%';
             AudioActive = false;
         }
     }
-}, 1000);
+}, 250);

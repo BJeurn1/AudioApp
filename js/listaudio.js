@@ -58,6 +58,7 @@ const SelectAudio = (index, newsource) => {
     SelectedAudioSource = newsource;
     SelectedAudio = GlobalAudioFiles[index];
     SelectedREALAudio = GlobalAudioFiles[index].audio;
+    SelectedREALAudio.volume = 1 / 300 * GlobalVolume;;
 
     Navto();
     PlayAfterSelect();
