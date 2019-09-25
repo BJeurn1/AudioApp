@@ -6,5 +6,5 @@ const BodyLoad = () => {
             LoadWrapper.classList.add('gone');
             GetAudio();
         }, 600);
-    }, 600);
+    }, 1000);
 }

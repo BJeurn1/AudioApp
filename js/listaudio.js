@@ -41,11 +41,13 @@ const ListAudioLength = () => {
 const ListAudio = () => {
     const AudioListElement = document.getElementById('AudioList');
     GlobalAudioFiles.forEach(file => {
-        AudioListElement.innerHTML+= '<li class="AudioItem"><p class="AudioInfoPrev" onclick="SelectAudio('+GlobalAudioFiles.indexOf(file)+', this.innerHTML)">'+file.source+'</p><p class="AudioInfoPrev" onclick="SelectAudio('+GlobalAudioFiles.indexOf(file)+')">'+file.volume+ ' ' +file.filter+'</p><p class="AudioInfoPrev InfoIcon" onclick="ShowInfo(\'index\')">i</p></li>'
+        AudioListElement.innerHTML+= '<li class="AudioItem"><p class="AudioInfoPrev" onclick="SelectAudio('+GlobalAudioFiles.indexOf(file)+', this.innerHTML)">'+file.source+'</p><p class="AudioInfoPrev InfoVolume" onclick="SelectAudio('+GlobalAudioFiles.indexOf(file)+')">'+file.volume+ ' ' +file.filter+'</p><p class="AudioInfoPrev InfoIcon" onclick="ShowInfo(\''+GlobalAudioFiles.indexOf(file)+'\')">i</p></li>';
     });
 }
 
 const SelectAudio = (index, newsource) => {
+    SelectedREALAudio.pause();
+    SelectedREALAudio.currentTime = 0;
     const AudioItems = document.getElementsByClassName('AudioItem');
     for (let i = 0; i < AudioItems.length; i++) {
         if (AudioItems[i].innerHTML.includes(SelectedAudioSource)) {

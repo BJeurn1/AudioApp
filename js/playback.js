@@ -14,6 +14,7 @@ const PlayPauseButton = document.getElementsByClassName('PlayPauseButton')[0];
 const ToggleLoop = () => {
     LoopButton.classList.toggle('active');
     LoopAudio = !LoopAudio;
+    SelectedREALAudio.loop = LoopAudio;
 }
 
 const PlayPause = () => {
@@ -55,11 +56,7 @@ const SecondTimer = setInterval(function() {
     if (AudioActive) {
         PlaybackBar.style.width = (100 / SelectedREALAudio.duration) * SelectedREALAudio.currentTime + "%";
         CurFileLength.innerHTML = ConvertLength(SelectedREALAudio.currentTime);
-        if (SelectedREALAudio.currentTime >= SelectedREALAudio.duration && LoopAudio) {
-            SelectedREALAudio.play();
-            CurFileLength.innerHTML = ConvertLength(0);
-            PlaybackBar.style.width = '0%';
-        } else if (SelectedREALAudio.currentTime >= SelectedREALAudio.duration) {
+        if (SelectedREALAudio.currentTime >= SelectedREALAudio.duration && !LoopAudio) {
             LengthBarCurr = 0;
             PlayPauseButton.innerHTML = "<i class='far fa-play'></i>";
             CurFileLength.innerHTML = ConvertLength(0);

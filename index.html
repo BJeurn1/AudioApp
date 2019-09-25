@@ -2,12 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content= "width=device-width, user-scalable=no">
     <title>Audio App</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="./fontawesome/css/all.css">
     <script src="js/load.js"></script>
-    <script src="js/nav.js"></script>
     <script src="js/listaudio.js"></script>
 </head>
 <body onload="BodyLoad()">
@@ -54,10 +53,29 @@
                 </ul>
             </div>
         </div>
+        <div class="DetailsPage active">
+            <header class="Menu">
+                <h2 onclick="document.getElementsByClassName('DetailsPage')[0].classList.toggle('active')" class="DetailsItem"><i class="fal fa-arrow-alt-down"></i><span style="margin-left:5vw;"> DETAILS</span></h2>
+            </header>
+            <h1 id="DetailsTitle" class="AudioDetails Title">Audio_File1</h1>
+            <div class="DetailsWrapper">
+                <p class="AudioDetails">Filter:</p>
+                <p class="AudioDetails">Volume:</p>
+                <p class="AudioDetails">Date:</p>
+                <p class="AudioDetails">Length:</p>
+            </div>
+            <div class="DetailsWrapper">
+                <p id="DetailsFilter" class="AudioDetails">DBA</p>
+                <p id="DetailsVolume" class="AudioDetails">60</p>
+                <p id="DetailsDate" class="AudioDetails">10-09-2019</p>
+                <p id="DetailsLength" class="AudioDetails">2:01</p>
+            </div>
+        </div>
     </div>
     <div id="DesktopWrapper">
         <h2 class="CenterText">Unfortunately this app only works on mobile as of now</h2>
     </div>
+    <script src="js/nav.js"></script>
     <script src="js/volume.js"></script>
     <script src="js/playback.js"></script>
 </body>
