@@ -57,6 +57,8 @@ const SelectAudio = (index, newsource) => {
         }
     }
 
+    document.getElementsByClassName('MeasuredFilter')[0].innerHTML = GlobalAudioFiles[index].filter;
+
     SelectedAudioSource = newsource;
     SelectedAudio = GlobalAudioFiles[index];
     SelectedREALAudio = GlobalAudioFiles[index].audio;

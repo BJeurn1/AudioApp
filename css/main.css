@@ -118,17 +118,17 @@
         text-align:center;
     }
 
-    #MeasuredDB {
+    #CurrentMeasuredDB {
         padding:0;
         margin:0;
         font-weight:normal;
         font-family:'Titillium Web';
         font-size:12vw;
-    } #MeasuredDB.tooloud {
+    } #CurrentMeasuredDB.tooloud {
         color:rgb(210, 95, 95);
-    } #MeasuredDB.toosoft {
+    } #CurrentMeasuredDB.toosoft {
         color:rgb(194, 194, 194);
-    } #MeasuredDB.correct {
+    } #CurrentMeasuredDB.correct {
         color:#8BD25F;
     }
 

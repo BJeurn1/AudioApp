@@ -29,7 +29,7 @@
                     <input oninput="UpdateVolume(this.value)" type="range" min="0" max="300" value="150" id="VolumeSlider" />
                 </div><!--
                 --><div class="PageDevider">
-                    <h1 id="MeasuredDB" class="correct">49 <span class="MeasuredFilter">Dba</span></h1>
+                    <h1 id="CurrentMeasuredDB" class="correct"><span id="CurrentDB">00</span> <span class="MeasuredFilter">Dba</span></h1>
                     <h2 id="OriginalDB">Original: 0 Dba</h2>
                 </div><!--
                 --><div class="PageDevider">
@@ -76,7 +76,7 @@
         <h2 class="CenterText">Unfortunately this app only works on mobile as of now</h2>
     </div>
     <script src="js/nav.js"></script>
-    <script src="js/volume.js"></script>
     <script src="js/playback.js"></script>
+    <script src="js/volume.js"></script>
 </body>
 </html>
