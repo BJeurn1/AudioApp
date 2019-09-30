@@ -57,6 +57,7 @@ if (navigator.getUserMedia) {
             var average = values / length;
         
             let val = Math.round(average);
+            AutoCalib(val);
             LiveMeasuredDB.innerHTML = val;
             if (AudioActive) {
                 if (val < SelectedAudio.volume - 2) {
@@ -84,4 +85,21 @@ if (navigator.getUserMedia) {
     });
 } else {
   console.log("getUserMedia not supported");
+}
+
+const AutoCalib = (MeasuredDB) => {
+    console.log('looping');
+    if (AudioActive) {
+        console.log('loopingactive');
+        if (SelectedAudio.volume > MeasuredDB) {
+            console.log('toolow');
+            GlobalVolume++;
+        } else if (SelectAudio.volume < MeasuredDB) {
+            console.log('tooloud');
+            GlobalVolume--;
+        }   2
+        
+        VolumeDisplay.value = GlobalVolume;
+        VolumeSlider.value = GlobalVolume;
+    }
 }
