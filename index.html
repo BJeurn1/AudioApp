@@ -13,6 +13,7 @@
     <div class="LoadingWrapper visible">
         <h1 class="CenterText">Loading</h1>
     </div>
+    <!-- !Mobile Version -->
     <div id="MobileWrapper">
         <header class="Menu">
             <h2 onclick="Navto()" class="MenuItem active">PLAYBACK</h2>
@@ -21,18 +22,11 @@
         <div class="PageWrapper">
             <div class="Page Left active">
                 <div class="PageDevider">
-                    <div class="VolumeButtonWrapper">
-                        <p onclick="UpdateVolume('minus')" class="VolumeButton Minus">─</p>
-                        <p onclick="UpdateVolume('plus')" class="VolumeButton Plus">＋</i></p>
-                    </div>
-                    <input oninput="UpdateVolume(this.value)" type="number" min="0" max="300" value="150" id="VolumeDisplay" /></br>
-                    <input oninput="UpdateVolume(this.value)" type="range" min="0" max="300" value="150" id="VolumeSlider" />
+                    <h1 class="CurrentMeasuredDB"><span class="CurrentDB">00</span> <span class="MeasuredFilter">Dba</span></h1>
+                    <h2 class="PreRecDbDisp" id="OriginalDB">Original: 0 Dba</h2>
                 </div><!--
                 --><div class="PageDevider">
-                    <h1 id="CurrentMeasuredDB" class="correct"><span id="CurrentDB">00</span> <span class="MeasuredFilter">Dba</span></h1>
-                    <h2 id="OriginalDB">Original: 0 Dba</h2>
-                </div><!--
-                --><div class="PageDevider">
+                    <p onclick="CalibrationToggle()" class="WideButton"><i class="fal fa-volume-up"></i></p>
                     <div class="PlaybackButtonWrapper">
                         <p class="PlayPauseButton" onclick="PlayPause()"><i class="far fa-play"></i></p><!--
                         --><p class="LoopButton" onclick="ToggleLoop()"><i class="far fa-repeat" aria-hidden="true"></i></p>
@@ -71,7 +65,29 @@
                 <p id="DetailsLength" class="AudioDetails">2:01</p>
             </div>
         </div>
+        <div class="CalibrationPage">
+            <header class="Menu">
+                <h2 onclick="CalibrationToggle()" class="CalibrationItem"><i class="fal fa-arrow-alt-down"></i><span style="margin-left:5vw;"> CALIBRATION</span></h2>
+            </header>
+            <div class="PageDevider">
+                <div class="VolumeButtonWrapper">
+                    <p onclick="UpdateVolume('minus')" class="VolumeButton Minus">─</p>
+                    <p onclick="UpdateVolume('plus')" class="VolumeButton Plus">＋</i></p>
+                </div>
+                <input oninput="UpdateVolume(this.value)" type="number" min="0" max="300" value="150" id="VolumeDisplay" /></br>
+                <input oninput="UpdateVolume(this.value)" type="range" min="0" max="300" value="150" id="VolumeSlider" />
+            </div><!--
+            --><div class="PageDevider">
+                <h1 id="CurrentDBCalib" class="CurrentMeasuredDB" class="correct" style="margin-top:0;"><span class="CurrentDB">00</span> <span class="MeasuredFilter">Dba</span></h1>
+                <h2 class="PreRecDbDisp">Target: 56 Dba</h2>
+            </div><!--
+            --><div class="PageDevider">
+                <p onclick="AutoCalibrateToggle()" id="AutoCalibButton" class="AutoCalibButton"><i class="fal fa-cogs"></i></p>
+                <p onclick="PlayCalibTune()" id="PlayCalibTuneButton" class="WideButton"><i class="far fa-play"></i></p>
+            </div>
+        </div>
     </div>
+    <!-- TODO Desktop Version -->
     <div id="DesktopWrapper">
         <h2 class="CenterText">Unfortunately this app only works on mobile as of now</h2>
     </div>

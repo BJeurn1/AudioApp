@@ -1,73 +1,85 @@
 const GetAudioData = async () => {
-    const response = await fetch("./php/getaudio.php");
-    const data = await response.json();
-    return data;
-}
+	const response = await fetch('./php/getaudio.php');
+	const data = await response.json();
+	return data;
+};
 
 let GlobalAudioFiles = [];
 let SelectedAudioSource;
 
 const GetAudio = async () => {
-    const AF = await GetAudioData();
-    let AudioFiles = [];
+	const AF = await GetAudioData();
+	let AudioFiles = [];
 
-    AF.forEach(file => {
-        let audio = new Audio(file.directory);
-        AudioFiles.push({
-                audio: audio,
-                filter: file.filter,
-                volume: file.volume,
-                source: file.source,
-                length: '',
-                date: file.date 
-            }
-        );
-    });
+	AF.forEach((file) => {
+		let audio = new Audio(file.directory);
+		AudioFiles.push({
+			audio: audio,
+			filter: file.filter,
+			volume: file.volume,
+			source: file.source,
+			length: '',
+			date: file.date
+		});
+	});
 
-    setTimeout(function (){
-        ListAudioLength();
-    }, 1000);
+	setTimeout(function() {
+		ListAudioLength();
+	}, 1000);
 
-    GlobalAudioFiles = AudioFiles;
-    ListAudio();
-}
+	GlobalAudioFiles = AudioFiles;
+	ListAudio();
+};
 
 const ListAudioLength = () => {
-    GlobalAudioFiles.forEach (file => {
-        file.length = file.audio.duration;
-    })
-}
+	GlobalAudioFiles.forEach((file) => {
+		file.length = file.audio.duration;
+	});
+};
 
 const ListAudio = () => {
-    const AudioListElement = document.getElementById('AudioList');
-    GlobalAudioFiles.forEach(file => {
-        AudioListElement.innerHTML+= '<li class="AudioItem"><p class="AudioInfoPrev" onclick="SelectAudio('+GlobalAudioFiles.indexOf(file)+', this.innerHTML)">'+file.source+'</p><p class="AudioInfoPrev InfoVolume" onclick="SelectAudio('+GlobalAudioFiles.indexOf(file)+')">'+file.volume+ ' ' +file.filter+'</p><p class="AudioInfoPrev InfoIcon" onclick="ShowInfo(\''+GlobalAudioFiles.indexOf(file)+'\')">i</p></li>';
-    });
-}
+	const AudioListElement = document.getElementById('AudioList');
+	GlobalAudioFiles.forEach((file) => {
+		AudioListElement.innerHTML +=
+			'<li class="AudioItem"><p class="AudioInfoPrev" onclick="SelectAudio(' +
+			GlobalAudioFiles.indexOf(file) +
+			', this.innerHTML)">' +
+			file.source +
+			'</p><p class="AudioInfoPrev InfoVolume" onclick="SelectAudio(' +
+			GlobalAudioFiles.indexOf(file) +
+			')">' +
+			file.volume +
+			' ' +
+			file.filter +
+			'</p><p class="AudioInfoPrev InfoIcon" onclick="ShowInfo(\'' +
+			GlobalAudioFiles.indexOf(file) +
+			'\')">i</p></li>';
+	});
+};
 
 const SelectAudio = (index, newsource) => {
-    SelectedREALAudio.pause();
-    SelectedREALAudio.currentTime = 0;
-    const AudioItems = document.getElementsByClassName('AudioItem');
-    for (let i = 0; i < AudioItems.length; i++) {
-        if (AudioItems[i].innerHTML.includes(SelectedAudioSource)) {
-            AudioItems[i].classList.remove('active');
-        } else if (AudioItems[i].innerHTML.includes(newsource)) {
-            AudioItems[i].classList.add('active');
-        }
-    }
+	SelectedREALAudio.pause();
+	SelectedREALAudio.currentTime = 0;
+	const AudioItems = document.getElementsByClassName('AudioItem');
+	for (let i = 0; i < AudioItems.length; i++) {
+		if (AudioItems[i].innerHTML.includes('>' + SelectedAudioSource + '<')) {
+			AudioItems[i].classList.remove('active');
+		} else if (AudioItems[i].innerHTML.includes('>' + newsource + '<')) {
+			AudioItems[i].classList.add('active');
+		}
+	}
 
-    document.getElementsByClassName('MeasuredFilter')[0].innerHTML = GlobalAudioFiles[index].filter;
+	document.getElementsByClassName('MeasuredFilter')[0].innerHTML = GlobalAudioFiles[index].filter;
 
-    SelectedAudioSource = newsource;
-    SelectedAudio = GlobalAudioFiles[index];
-    SelectedREALAudio = GlobalAudioFiles[index].audio;
-    SelectedREALAudio.volume = 1 / 300 * GlobalVolume;;
+	SelectedAudioSource = newsource;
+	SelectedAudio = GlobalAudioFiles[index];
+	SelectedREALAudio = GlobalAudioFiles[index].audio;
+	SelectedREALAudio.volume = 1 / 300 * GlobalVolume;
 
-    if (LoopAudio) {
-        SelectedREALAudio.loop = true;
-    }
+	if (LoopAudio) {
+		SelectedREALAudio.loop = true;
+	}
 
-    Navto();
-    PlayAfterSelect();
-}
+	Navto();
+	PlayAfterSelect();
+};
